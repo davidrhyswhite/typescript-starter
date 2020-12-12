@@ -1,0 +1,18 @@
+# Node
+node_modules/
+
+# Coverage reports
+coverage/
+
+# Build
+dist/
+
+# Additional
+logs/
+tmp/
+
+# Serverless directories
+.serverless/
+
+# Codegen generated code
+src/generated/

@@ -1,0 +1,125 @@
+{
+  "name": "typescript-starter",
+  "version": "0.1.0",
+  "main": "index.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidrhyswhite/typescript-starter.git"
+  },
+  "author": "David Rhys White<david.rhys.white@icloud.com>",
+  "engines": {
+    "node": ">= 12.18.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf coverage/ dist/ logs/ node_modules/",
+    "postclean": "yarn install",
+    "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" && prettier --check .",
+    "lint:fix": "tsc --noEmit && eslint \"**/*.{js,ts}\" --fix && prettier --loglevel=silent --write .",
+    "test": "jest --detectOpenHandles --verbose",
+    "test:coverage": "yarn test --coverage",
+    "test:watch": "yarn test --watchAll"
+  },
+  "devDependencies": {
+    "@types/eslint": "^6.1.1",
+    "@types/jest": "^24.0.23",
+    "@types/node": "^12.7.8",
+    "@typescript-eslint/eslint-plugin": "^2.3.1",
+    "@typescript-eslint/parser": "^2.3.1",
+    "eslint": "^6.4.0",
+    "eslint-config-prettier": "^6.11.0",
+    "husky": "^4.2.5",
+    "jest": "^24.9.0",
+    "lint-staged": "^10.2.13",
+    "prettier": "^2.0.5",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^24.1.0",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.3"
+  },
+  "lint-staged": {
+    "*": [
+      "yarn lint"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.json"
+      }
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "testMatch": [
+      "**/test/**/*.(test|unit|integration).(ts|js)"
+    ],
+    "testEnvironment": "node"
+  },
+  "nodemonConfig": {
+    "restartable": "rs",
+    "ignore": [
+      ".git",
+      "node_modules/**/*"
+    ],
+    "verbose": true,
+    "watch": [
+      "src",
+      "config"
+    ],
+    "ext": "ts js json graphql",
+    "exec": "yarn build:types && ts-node ./src/run/server.ts",
+    "env": {
+      "NODE_ENV": "chaosnet",
+      "LOCAL": "true"
+    }
+  },
+  "prettier": {
+    "printWidth": 120,
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "eslintConfig": {
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+      "plugin:@typescript-eslint/recommended",
+      "prettier",
+      "prettier/@typescript-eslint"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2018,
+      "sourceType": "module"
+    },
+    "env": {
+      "es6": true,
+      "node": true
+    },
+    "rules": {
+      "semi": [
+        "error",
+        "always"
+      ],
+      "quotes": [
+        "error",
+        "single"
+      ],
+      "comma-dangle": [
+        "error",
+        "always-multiline"
+      ],
+      "@typescript-eslint/no-explicit-any": 1,
+      "@typescript-eslint/no-unused-vars": "warn"
+    }
+  }
+}

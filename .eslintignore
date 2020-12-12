@@ -1,0 +1,24 @@
+# Node
+node_modules/
+
+# Coverage reports
+coverage/
+
+# Build
+dist/
+
+# data definition files
+**/*.d.ts
+
+# custom definition files
+/src/types/
+
+# Additional
+logs/
+tmp/
+
+# Serverless directories
+.serverless/
+
+# Codegen generated code
+src/generated/
